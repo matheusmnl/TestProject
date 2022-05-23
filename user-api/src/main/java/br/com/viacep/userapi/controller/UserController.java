@@ -1,6 +1,8 @@
 package br.com.viacep.userapi.controller;
 
 import br.com.viacep.userapi.dto.UserDTO;
+import br.com.viacep.userapi.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -11,35 +13,37 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    @GetMapping("/users")
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/user/")
     public List<UserDTO> getUsers() {
+        List<UserDTO> usuarios = userService.getAll();
         return usuarios;
     }
-    @GetMapping("/users/{cep}")
-    public UserDTO getUsersFiltro(@PathVariable String cep) {
-        for (UserDTO userFilter:usuarios) {
-            if (userFilter.getCep().equals((cep))){
-                return userFilter;
-            }
-        }
-        return null;
+    @GetMapping("/users/{id}")
+    public UserDTO findById(@PathVariable Long id) {
+        return userService.findById(id);
     }
-    @PostMapping("/newUser")
-    UserDTO inserir(@RequestBody UserDTO userDTO) {
-        userDTO.setDataCadastro(new Date());
-        usuarios.add(userDTO);
-        return userDTO;
+    @PostMapping("/user")
+    UserDTO newUser(@RequestBody UserDTO userDTO) {
+        return userService.save(userDTO);
     }
-    @DeleteMapping("/user/{cep}")
-    public boolean remover(@PathVariable String cep){
-        for (UserDTO userFilter:usuarios) {
-            if (userFilter.getCep().equals(cep)) {
-                usuarios.remove(userFilter);
-                return true;
-            }
-        }
-        return false;
+    @GetMapping("/user/cep/{cep}")
+    UserDTO findByCep(@PathVariable String cep){
+        return userService.findByCep(cep);
     }
+    @DeleteMapping("/user/{id}")
+    UserDTO delete(@PathVariable Long id){
+        return userService.delete(id);
+    }
+    @GetMapping("/user/search")
+    public List<UserDTO> queryByName(
+            @RequestParam(name = "nome", required = true)
+            String nome) {
+                return userService.queryByName(nome);
+    }
+
     public static List<UserDTO> usuarios = new ArrayList<UserDTO>();
         @PostConstruct
         public void initiateList() {

@@ -1,6 +1,11 @@
 package br.com.viacep.userapi.model;
 
 import br.com.viacep.userapi.dto.UserDTO;
+import org.springframework.data.annotation.Id;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class User {
@@ -83,12 +88,12 @@ public class User {
     public static User convert(UserDTO userDTO) {
         User user = new User();
         user.setNome(userDTO.getNome());
-        user.setCep(user.getCep());
-        user.setCpf(user.getCpf());
-        user.setEmail(user.getEmail());
-        user.setEndereco(user.getEndereco());
-        user.setTelefone(user.getTelefone());
-        user.setDataCadastro(user.getDataCadastro());
+        user.setCep(userDTO.getCep());
+        user.setCpf(userDTO.getCpf());
+        user.setEmail(userDTO.getEmail());
+        user.setEndereco(userDTO.getEndereco());
+        user.setTelefone(userDTO.getTelefone());
+        user.setDataCadastro(userDTO.getDataCadastro());
 
         return user;
     }

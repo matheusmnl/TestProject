@@ -1,5 +1,7 @@
 package br.com.viacep.userapi.dto;
 
+import br.com.viacep.userapi.model.User;
+
 import java.util.Date;
 
 public class UserDTO {
@@ -11,6 +13,7 @@ public class UserDTO {
     private String email;
     private String telefone;
     private Date dataCadastro;
+
 
     public String getNome() {
         return nome;
