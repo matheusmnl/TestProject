@@ -2,6 +2,7 @@ package br.com.viacep.userapi.controller;
 
 import br.com.viacep.userapi.dto.UserDTO;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +16,15 @@ public class UserController {
     @GetMapping("/users")
     public List<UserDTO> getUsers() {
         return usuarios;
+    }
+    @GetMapping("/users/{cep}")
+    public UserDTO getUsersFiltro(@PathVariable String cep) {
+        for (UserDTO userFilter:usuarios) {
+            if (userFilter.getCep().equals((cep))){
+                return userFilter;
+            }
+        }
+        return null;
     }
     public static List<UserDTO> usuarios = new ArrayList<UserDTO>();
         @PostConstruct
