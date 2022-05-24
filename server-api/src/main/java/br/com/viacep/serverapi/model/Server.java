@@ -1,5 +1,7 @@
 package br.com.viacep.serverapi.model;
 
+import br.com.viacep.serverapi.dto.ServerDTO;
+
 import javax.persistence.*;
 import javax.swing.plaf.synth.Region;
 import java.util.Date;
