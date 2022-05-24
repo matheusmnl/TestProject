@@ -7,4 +7,8 @@ date timestamp not null,
 total float not null
 );
 
-create table
+create table server.region (
+server_id bigserial REFERENCES servers.server(id),
+product_identifier varchar(100) not null,
+tax_percentage float not null
+);
