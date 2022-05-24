@@ -36,7 +36,7 @@ public class ProductService {
                 .map(Product::convert)
                 .collect(Collectors.toList());
     }
-    public Product findByProductIdentifier(
+    public ProductDTO findByProductIdentifier(
             String productIdentifier
     ){
         Product product = productRepository
