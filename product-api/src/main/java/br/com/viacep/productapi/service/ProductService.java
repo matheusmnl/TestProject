@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,6 +50,14 @@ public class ProductService {
         Product product =
                 productRepository.save(Product.convert(productDTO));
         return ProductDTO.convert(product);
+    }
+    public void delete(long productId) {
+
+        Optional<Product> product =
+                productRepository.findById(productId);
+        if(product.isPresent()) {
+            productRepository.delete(product.get());
+        }
     }
 
 }
