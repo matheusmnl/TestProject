@@ -1,5 +1,6 @@
 package br.com.viacep.productapi.model;
 
+import br.com.viacep.productapi.dto.ProductDTO;
 import jdk.jfr.Category;
 
 import javax.persistence.*;

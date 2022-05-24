@@ -44,7 +44,8 @@ public class ProductController {
     @DeleteMapping("/product/{id}")
     ProductDTO delete(@PathVariable Long id)
         throws ProductNotFoundException {
-        return productService.delete(id);
+        return productService
+                .delete(id);
     }
 
 }
